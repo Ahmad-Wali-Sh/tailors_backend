@@ -21,6 +21,7 @@ class MeasurementAfghani(models.Model):
     bardaman = models.FloatField()
     pants_qad = models.FloatField()
     pants_dam = models.FloatField()
+    description = models.TextField(null=True,blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
