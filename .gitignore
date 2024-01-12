@@ -1,0 +1,30 @@
+# Django
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+env/
+*.pyc
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# Database
+db.sqlite3
+
+# Static files
+staticfiles/
+media/
+
+# Temporary files
+*.swp
+*~
+
+# Ignore migrations for all apps
+**/migrations/
