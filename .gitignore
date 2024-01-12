@@ -28,3 +28,7 @@ media/
 
 # Ignore migrations for all apps
 **/migrations/
+
+**/__pycache__
+
+*.pyc
