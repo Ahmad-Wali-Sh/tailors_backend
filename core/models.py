@@ -28,7 +28,6 @@ class CustomerInformation(models.Model):
 class MeasurementType(models.Model):
     name = models.CharField(max_length=50)
     fields = models.JSONField()
-
     def __str__(self):
         return self.name
 
@@ -36,6 +35,9 @@ class CustomerMeasurement(models.Model):
     customer = models.ForeignKey(CustomerInformation, on_delete=models.CASCADE)
     measurement_type = models.ForeignKey(MeasurementType, on_delete=models.CASCADE)
     data = models.JSONField()
+
+    class Meta:
+        unique_together = ['customer', 'measurement_type']
 
     def __str__(self):
         return f"{self.customer} - {self.measurement_type}"
