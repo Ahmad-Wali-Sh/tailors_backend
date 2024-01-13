@@ -1,26 +1,28 @@
 from rest_framework import viewsets
-from core.models import ClothingType, CustomField, Measurement, CustomerInfo, Order, TailorShopInfo
-from .serializers import ClothingTypeSerializer, CustomFieldSerializer, MeasurementSerializer, TailorShopInfoSerialzier, CustomerInfoSerializer, OrderSerializer
+from core.models import TailorShop, CustomerInformation, MeasurementType, CustomerMeasurement, Order
+from .serializers import (
+    TailorShopSerializer,
+    CustomerInformationSerializer,
+    MeasurementTypeSerializer,
+    CustomerMeasurementSerializer,
+    OrderSerializer
+)
 
-class TailorShopView(viewsets.ModelViewSet):
-    queryset = TailorShopInfo.objects.all()
-    serializer_class = TailorShopInfoSerialzier
+class TailorShopViewSet(viewsets.ModelViewSet):
+    queryset = TailorShop.objects.all()
+    serializer_class = TailorShopSerializer
 
-class ClothingTypeViewSet(viewsets.ModelViewSet):
-    queryset = ClothingType.objects.all()
-    serializer_class = ClothingTypeSerializer
+class CustomerInformationViewSet(viewsets.ModelViewSet):
+    queryset = CustomerInformation.objects.all()
+    serializer_class = CustomerInformationSerializer
 
-class CustomFieldViewSet(viewsets.ModelViewSet):
-    queryset = CustomField.objects.all()
-    serializer_class = CustomFieldSerializer
+class MeasurementTypeViewSet(viewsets.ModelViewSet):
+    queryset = MeasurementType.objects.all()
+    serializer_class = MeasurementTypeSerializer
 
-class MeasurementViewSet(viewsets.ModelViewSet):
-    queryset = Measurement.objects.all()
-    serializer_class = MeasurementSerializer
-
-class CustomerInfoViewSet(viewsets.ModelViewSet):
-    queryset = CustomerInfo.objects.all()
-    serializer_class = CustomerInfoSerializer
+class CustomerMeasurementViewSet(viewsets.ModelViewSet):
+    queryset = CustomerMeasurement.objects.all()
+    serializer_class = CustomerMeasurementSerializer
 
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()

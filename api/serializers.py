@@ -1,52 +1,27 @@
 from rest_framework import serializers
-from core.models import ClothingType, CustomField, Measurement, CustomFieldValue, CustomerInfo, Order, TailorShopInfo
+from core.models import TailorShop, CustomerInformation, MeasurementType, CustomerMeasurement, Order
 
-class TailorShopInfoSerialzier(serializers.ModelSerializer):
+class TailorShopSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TailorShopInfo
+        model = TailorShop
         fields = '__all__'
 
-class ClothingTypeSerializer(serializers.ModelSerializer):
+class CustomerInformationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ClothingType
+        model = CustomerInformation
         fields = '__all__'
 
-class CustomFieldSerializer(serializers.ModelSerializer):
-    clothing_type = ClothingTypeSerializer()
+class MeasurementTypeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomField
+        model = MeasurementType
         fields = '__all__'
 
-
-class CustomFieldValueSerializer(serializers.ModelSerializer):
-    custom_field = CustomFieldSerializer(read_only=True)
-    measurement = serializers.PrimaryKeyRelatedField(queryset=Measurement.objects.all())
+class CustomerMeasurementSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomFieldValue
+        model = CustomerMeasurement
         fields = '__all__'
-
-class MeasurementSerializer(serializers.ModelSerializer):
-    custom_fields_values = CustomFieldValueSerializer(many=True, read_only=True)
-    clothing_type = ClothingTypeSerializer()
-
-    class Meta:
-        model = Measurement
-        fields = '__all__'
-
-
-class CustomerInfoSerializer(serializers.ModelSerializer):
-    measurements = MeasurementSerializer(many=True, read_only=True)
-    class Meta:
-        model = CustomerInfo
-        fields = '__all__'
-
-
-
 
 class OrderSerializer(serializers.ModelSerializer):
-    clothing_type = ClothingTypeSerializer()
-    customer = CustomerInfoSerializer()
-    measurement = MeasurementSerializer()
     class Meta:
         model = Order
         fields = '__all__'

@@ -1,37 +1,30 @@
 from django.contrib import admin
-from .models import TailorShopInfo, ClothingType, CustomField, Measurement, CustomFieldValue, CustomerInfo, Order
+from .models import TailorShop, CustomerInformation, MeasurementType, CustomerMeasurement, Order
+
+@admin.register(TailorShop)
+class TailorShopAdmin(admin.ModelAdmin):
+    list_display = ['name', 'contact', 'tailor_name', 'unit']
 
 
-class TailorShopInfoAdmin(admin.ModelAdmin):
-    list_display = ('name', 'contact', 'address', 'description', 'tailor_name', 'unit')
+@admin.register(CustomerInformation)
+class CustomerInformationAdmin(admin.ModelAdmin):
+    list_display = ['first_name', 'last_name', 'contact', 'created', 'updated']
+    search_fields = ['first_name', 'last_name', 'contact']
 
-class ClothingTypeAdmin(admin.ModelAdmin):
-    list_display = ('name',)
 
-class CustomFieldAdmin(admin.ModelAdmin):
-    list_display = ('name', 'clothing_type', 'data_type')
+@admin.register(MeasurementType)
+class MeasurementTypeAdmin(admin.ModelAdmin):
+    list_display = ['name']
+    search_fields = ['name']
 
-class MeasurementAdmin(admin.ModelAdmin):
-    list_display = ('clothing_type', 'created_date', 'updated_date')
-    search_fields = ['clothing_type__name']
 
-class CustomFieldValueAdmin(admin.ModelAdmin):
-    list_display = ('measurement','value_char', 'value_float')
-    list_filter = ('measurement__clothing_type',)
+@admin.register(CustomerMeasurement)
+class CustomerMeasurementAdmin(admin.ModelAdmin):
+    list_display = ['customer', 'measurement_type']
+    search_fields = ['customer__first_name', 'customer__last_name', 'measurement_type__name']
 
-class CustomerInfoAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'contact', 'created', 'updated')
-    search_fields = [ 'first_name', 'last_name']
 
+@admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('customer', 'clothing_type', 'price', 'created_date', 'delivery_date', 'status')
-    search_fields = ['clothing_type__name']
-    list_filter = ('status', 'clothing_type')
-
-admin.site.register(TailorShopInfo, TailorShopInfoAdmin)
-admin.site.register(ClothingType, ClothingTypeAdmin)
-admin.site.register(CustomField, CustomFieldAdmin)
-admin.site.register(Measurement, MeasurementAdmin)
-admin.site.register(CustomFieldValue, CustomFieldValueAdmin)
-admin.site.register(CustomerInfo, CustomerInfoAdmin)
-admin.site.register(Order, OrderAdmin)
+    list_display = ['customer', 'measurement_type', 'instance_measurement', 'status', 'price', 'date_delivery', 'date_created']
+    search_fields = ['customer__first_name', 'customer__last_name', 'measurement_type__name']
