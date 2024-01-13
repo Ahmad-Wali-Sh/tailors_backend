@@ -1,16 +1,15 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import TailorShopInfoViewSet, MeasurementAfghaniViewSet, MeasurementSuitViewSet, CustomerInfoViewSet, OrderStyleAfghaniViewSet, OrderStyleSuitViewSet, OrderViewSet
+from .views import ClothingTypeViewSet, CustomFieldViewSet, TailorShopView, MeasurementViewSet, CustomerInfoViewSet, OrderViewSet
 
 router = DefaultRouter()
-router.register(r'tailor-shop-info', TailorShopInfoViewSet)
-router.register(r'measurement-afghani', MeasurementAfghaniViewSet)
-router.register(r'measurement-suit', MeasurementSuitViewSet)
-router.register(r'customer-info', CustomerInfoViewSet)
-router.register(r'order-style-afghani', OrderStyleAfghaniViewSet)
-router.register(r'order-style-suit', OrderStyleSuitViewSet)
-router.register(r'order', OrderViewSet)
+router.register(r'clothing-types', ClothingTypeViewSet, basename='clothing-type')
+router.register(r'custom-fields', CustomFieldViewSet, basename='custom-field')
+router.register(r'tailors-info', TailorShopView, basename='custom-field')
+router.register(r'measurements', MeasurementViewSet, basename='measurement')
+router.register(r'customer-infos', CustomerInfoViewSet, basename='customer-info')
+router.register(r'orders', OrderViewSet, basename='order')
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
 ]

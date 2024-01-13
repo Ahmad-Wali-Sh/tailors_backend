@@ -1,30 +1,26 @@
 from rest_framework import viewsets
-from core.models import TailorShopInfo, MeasurementAfghani, MeasurementSuit, CustomerInfo, OrderStyleAfghani, OrderStyleSuit, Order
-from .serializers import TailorShopInfoSerializer, MeasurementAfghaniSerializer, MeasurementSuitSerializer, CustomerInfoSerializer, OrderStyleAfghaniSerializer, OrderStyleSuitSerializer, OrderSerializer
+from core.models import ClothingType, CustomField, Measurement, CustomerInfo, Order, TailorShopInfo
+from .serializers import ClothingTypeSerializer, CustomFieldSerializer, MeasurementSerializer, TailorShopInfoSerialzier, CustomerInfoSerializer, OrderSerializer
 
-class TailorShopInfoViewSet(viewsets.ModelViewSet):
+class TailorShopView(viewsets.ModelViewSet):
     queryset = TailorShopInfo.objects.all()
-    serializer_class = TailorShopInfoSerializer
+    serializer_class = TailorShopInfoSerialzier
 
-class MeasurementAfghaniViewSet(viewsets.ModelViewSet):
-    queryset = MeasurementAfghani.objects.all()
-    serializer_class = MeasurementAfghaniSerializer
+class ClothingTypeViewSet(viewsets.ModelViewSet):
+    queryset = ClothingType.objects.all()
+    serializer_class = ClothingTypeSerializer
 
-class MeasurementSuitViewSet(viewsets.ModelViewSet):
-    queryset = MeasurementSuit.objects.all()
-    serializer_class = MeasurementSuitSerializer
+class CustomFieldViewSet(viewsets.ModelViewSet):
+    queryset = CustomField.objects.all()
+    serializer_class = CustomFieldSerializer
+
+class MeasurementViewSet(viewsets.ModelViewSet):
+    queryset = Measurement.objects.all()
+    serializer_class = MeasurementSerializer
 
 class CustomerInfoViewSet(viewsets.ModelViewSet):
     queryset = CustomerInfo.objects.all()
     serializer_class = CustomerInfoSerializer
-
-class OrderStyleAfghaniViewSet(viewsets.ModelViewSet):
-    queryset = OrderStyleAfghani.objects.all()
-    serializer_class = OrderStyleAfghaniSerializer
-
-class OrderStyleSuitViewSet(viewsets.ModelViewSet):
-    queryset = OrderStyleSuit.objects.all()
-    serializer_class = OrderStyleSuitSerializer
 
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
