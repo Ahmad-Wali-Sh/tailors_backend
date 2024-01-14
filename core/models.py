@@ -17,7 +17,7 @@ class CustomerInformation(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     contact = models.CharField(max_length=20)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     measurements = models.ManyToManyField(
