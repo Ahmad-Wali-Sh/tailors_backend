@@ -2,11 +2,11 @@ from django.db import models
 
 
 class TailorShop(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=60)
     contact = models.CharField(max_length=20)
     address = models.TextField()
     description = models.TextField()
-    tailor_name = models.CharField(max_length=255)
+    tailor_name = models.CharField(max_length=60)
     unit = models.CharField(max_length=50)
 
     def __str__(self):
