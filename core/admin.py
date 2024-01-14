@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import TailorShop, CustomerInformation, MeasurementType, CustomerMeasurement, Order
+from .models import TailorShop, CustomerInformation, MeasurementType, CustomerMeasurement, Order, OrderMeasurements
+
 
 @admin.register(TailorShop)
 class TailorShopAdmin(admin.ModelAdmin):
@@ -21,10 +22,20 @@ class MeasurementTypeAdmin(admin.ModelAdmin):
 @admin.register(CustomerMeasurement)
 class CustomerMeasurementAdmin(admin.ModelAdmin):
     list_display = ['customer', 'measurement_type']
-    search_fields = ['customer__first_name', 'customer__last_name', 'measurement_type__name']
+    search_fields = ['customer__first_name',
+                     'customer__last_name', 'measurement_type__name']
+
+
+@admin.register(OrderMeasurements)
+class OrderMeasurementsAdmin(admin.ModelAdmin):
+    list_display = ['customer', 'measurement_type']
+    search_fields = ['customer__first_name',
+                     'customer__last_name', 'measurement_type__name']
 
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['customer', 'measurement_type', 'instance_measurement', 'status', 'price', 'date_delivery', 'date_created']
-    search_fields = ['customer__first_name', 'customer__last_name', 'measurement_type__name']
+    list_display = ['customer', 'measurement_type', 'instance_measurement',
+                    'status', 'price', 'date_delivery', 'date_created']
+    search_fields = ['customer__first_name',
+                     'customer__last_name', 'measurement_type__name']
