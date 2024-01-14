@@ -29,6 +29,9 @@ class CustomerMeasurementViewSet(viewsets.ModelViewSet):
     queryset = CustomerMeasurement.objects.all()
     serializer_class = CustomerMeasurementSerializer
 
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
+
 
 class OrderMeasurementViewSet(viewsets.ModelViewSet):
     queryset = OrderMeasurements.objects.all()

@@ -21,7 +21,7 @@ class OrderMesurementSerializer(serializers.ModelSerializer):
 
 
 class CustomerMeasurementSerializer(serializers.ModelSerializer):
-    measurement_type = MeasurementTypeSerializer(read_only=True)
+    # measurement_type = MeasurementTypeSerializer(read_only=True)
 
     class Meta:
         model = CustomerMeasurement
