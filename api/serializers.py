@@ -44,8 +44,6 @@ class CustomerInformationSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     instance_measurement = OrderMesurementSerializer(read_only=True)
-    measurement_type = MeasurementTypeSerializer(read_only=True)
-    customer = CustomerInformationSerializer(read_only=True)
 
     class Meta:
         model = Order

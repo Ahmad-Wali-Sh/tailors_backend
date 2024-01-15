@@ -74,7 +74,7 @@ class Order(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     date_delivery = models.DateField()
-    date_created = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateField()
 
     def __str__(self):
         return f"Order for {self.customer} - {self.measurement_type}"
