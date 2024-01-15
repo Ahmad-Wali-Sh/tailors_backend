@@ -1,5 +1,6 @@
-from rest_framework import viewsets
-from core.models import TailorShop, CustomerInformation, MeasurementType, CustomerMeasurement, Order, OrderMeasurements
+from rest_framework import viewsets, filters
+from core.models import TailorShop, CustomerInformation, MeasurementType, \
+    CustomerMeasurement, Order, OrderMeasurements
 from .serializers import (
     TailorShopSerializer,
     CustomerInformationSerializer,
@@ -18,6 +19,8 @@ class TailorShopViewSet(viewsets.ModelViewSet):
 class CustomerInformationViewSet(viewsets.ModelViewSet):
     queryset = CustomerInformation.objects.all()
     serializer_class = CustomerInformationSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['first_name', 'last_name', 'id', 'contact', 'description']
 
 
 class MeasurementTypeViewSet(viewsets.ModelViewSet):
