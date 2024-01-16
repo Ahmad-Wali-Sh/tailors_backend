@@ -22,7 +22,6 @@ class CustomerInformationViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['first_name', 'last_name', 'id', 'contact', 'description']
 
-
 class MeasurementTypeViewSet(viewsets.ModelViewSet):
     queryset = MeasurementType.objects.all()
     serializer_class = MeasurementTypeSerializer

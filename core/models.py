@@ -80,14 +80,13 @@ class Order(models.Model):
         return f"Order for {self.customer} - {self.measurement_type}"
 
     def save(self, *args, **kwargs):
-        if not self.instance_measurement:
-            fields_data = CustomerMeasurement.objects.filter(
-                measurement_type=self.measurement_type).filter(customer=self.customer).first()
-            new_measurement_instance = OrderMeasurements.objects.create(
+        fields_data = CustomerMeasurement.objects.filter(
+                measurement_type=self.measurement_type) \
+                    .filter(customer=self.customer).first()
+        new_measurement_instance = OrderMeasurements.objects.create(
                 customer=self.customer,
                 measurement_type=self.measurement_type,
                 data=fields_data.data
             )
-            self.instance_measurement = new_measurement_instance
-
+        self.instance_measurement = new_measurement_instance
         super().save(*args, **kwargs)
