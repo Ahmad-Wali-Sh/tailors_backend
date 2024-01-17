@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from core.models import TailorShop, CustomerInformation, MeasurementType, CustomerMeasurement, Order, OrderMeasurements
+from core.models import TailorShop, CustomerInformation, MeasurementType, \
+    CustomerMeasurement, Order, OrderMeasurements
 
 
 class TailorShopSerializer(serializers.ModelSerializer):
