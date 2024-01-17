@@ -9,6 +9,7 @@ from .serializers import (
     OrderSerializer,
     OrderMesurementSerializer
 )
+from django_filters import rest_framework as dfilters
 
 
 class TailorShopViewSet(viewsets.ModelViewSet):
@@ -21,6 +22,7 @@ class CustomerInformationViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerInformationSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['first_name', 'last_name', 'id', 'contact', 'description']
+
 
 class MeasurementTypeViewSet(viewsets.ModelViewSet):
     queryset = MeasurementType.objects.all()
@@ -39,7 +41,8 @@ class OrderMeasurementViewSet(viewsets.ModelViewSet):
     queryset = OrderMeasurements.objects.all()
     serializer_class = OrderMesurementSerializer
 
-
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    filter_backends = (dfilters.DjangoFilterBackend,)
+    filterset_fields = ('customer',)

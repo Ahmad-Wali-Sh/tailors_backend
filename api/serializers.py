@@ -45,7 +45,14 @@ class CustomerInformationSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     instance_measurement = OrderMesurementSerializer(read_only=True)
+    measurements_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Order
         fields = '__all__'
+
+    def get_measurements_name(self, obj):
+        if (obj.measurement_type.name):
+            return obj.measurement_type.name
+        else:
+            return ''

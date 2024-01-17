@@ -59,19 +59,12 @@ class OrderMeasurements(models.Model):
 
 
 class Order(models.Model):
-    STATUS_CHOICES = [
-        ('new', 'New'),
-        ('completed', 'Completed'),
-        ('paid', 'Paid'),
-        ('canceled', 'Canceled'),
-    ]
-
     customer = models.ForeignKey(CustomerInformation, on_delete=models.CASCADE)
     measurement_type = models.ForeignKey(
         MeasurementType, on_delete=models.CASCADE)
     instance_measurement = models.ForeignKey(
         OrderMeasurements, on_delete=models.CASCADE, null=True, blank=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    archieved = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     date_delivery = models.DateField()
     date_created = models.DateField()
