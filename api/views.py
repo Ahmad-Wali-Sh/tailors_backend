@@ -10,6 +10,7 @@ from .serializers import (
     OrderMesurementSerializer
 )
 from django_filters import rest_framework as dfilters
+from django_filters.widgets import RangeWidget
 
 
 class TailorShopViewSet(viewsets.ModelViewSet):
@@ -41,8 +42,16 @@ class OrderMeasurementViewSet(viewsets.ModelViewSet):
     queryset = OrderMeasurements.objects.all()
     serializer_class = OrderMesurementSerializer
 
+class OrderFilter(dfilters.FilterSet):
+    date_delivery = dfilters.DateFromToRangeFilter(widget=RangeWidget(attrs={'type': 'date'}))
+
+    class Meta:
+        model = Order
+        fields = ['customer', 'date_delivery', 'measurement_type', 'archieved', 'date_created']
+
+
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     filter_backends = (dfilters.DjangoFilterBackend,)
-    filterset_fields = ('customer',)
+    filterset_class = OrderFilter

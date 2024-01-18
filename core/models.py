@@ -65,7 +65,15 @@ class Order(models.Model):
     instance_measurement = models.ForeignKey(
         OrderMeasurements, on_delete=models.CASCADE, null=True, blank=True)
     archieved = models.BooleanField(default=False)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField(default=1)
+    parcha = models.CharField(max_length=60, null=True,blank=True)
+    meters = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+
+    dokht_price = models.DecimalField(max_digits=10, decimal_places=2)
+    clothing_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    rasid = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    al_baghi = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     date_delivery = models.DateField()
     date_created = models.DateField()
 
@@ -82,4 +90,7 @@ class Order(models.Model):
                 data=fields_data.data
             )
         self.instance_measurement = new_measurement_instance
+
+        self.grand_total = self.dokht_price + self.clothing_price
+        self.al_baghi = self.grand_total - self.rasid
         super().save(*args, **kwargs)

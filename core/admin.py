@@ -37,6 +37,6 @@ class OrderMeasurementsAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['customer', 'measurement_type', 'instance_measurement',
-                    'archieved', 'price', 'date_delivery', 'date_created']
+                    'archieved', 'dokht_price', 'date_delivery', 'date_created']
     search_fields = ['customer__first_name',
                      'customer__last_name', 'measurement_type__name']
