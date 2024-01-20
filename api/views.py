@@ -53,5 +53,7 @@ class OrderFilter(dfilters.FilterSet):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    filter_backends = (dfilters.DjangoFilterBackend,)
+    filter_backends = (dfilters.DjangoFilterBackend, filters.OrderingFilter)
     filterset_class = OrderFilter
+    ordering_fields = ['id', 'date_delivery']
+    ordering = ['id', 'date_delivery']
