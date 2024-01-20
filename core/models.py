@@ -6,9 +6,9 @@ class TailorShop(models.Model):
     contact = models.CharField(max_length=80)
     address = models.TextField()
     description = models.TextField(null=True, blank=True)
-    tailor_name = models.CharField(max_length=60, null=True, blank=True)
-    unit = models.CharField(max_length=50, null=True, blank=True)
-
+    day_to_deliver = models.PositiveIntegerField(default=3)
+    date_to_deliver = models.DateField(null=True, blank=True)
+    default_price = models.DecimalField(max_digits=10, decimal_places=1, default=350)
     def __str__(self):
         return self.name
 

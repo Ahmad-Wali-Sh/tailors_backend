@@ -5,7 +5,7 @@ from .models import TailorShop, CustomerInformation, MeasurementType, \
 
 @admin.register(TailorShop)
 class TailorShopAdmin(admin.ModelAdmin):
-    list_display = ['name', 'contact', 'tailor_name', 'unit']
+    list_display = ['name', 'contact']
 
 
 @admin.register(CustomerInformation)
