@@ -29,6 +29,7 @@ class CustomerInformation(models.Model):
 
 class MeasurementType(models.Model):
     name = models.CharField(max_length=50)
+    required = models.BooleanField(default=True)
     fields = models.JSONField()
 
     def __str__(self):
