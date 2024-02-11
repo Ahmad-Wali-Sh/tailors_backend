@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from core.models import TailorShop, CustomerInformation, MeasurementType, \
-    CustomerMeasurement, Order, OrderMeasurements
+    CustomerMeasurement, Order, OrderMeasurements, Expense, Receivables, \
+    ExpenseTypes
 
 
 class TailorShopSerializer(serializers.ModelSerializer):
@@ -60,6 +61,25 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def get_customer_details(self, obj):
         customer_qs = CustomerInformation.objects.filter(id=obj.customer.id)
-        customerSerailzier = CustomerInformationSerializer(customer_qs, many=True)
+        customerSerailzier = CustomerInformationSerializer(
+            customer_qs, many=True)
         if (customerSerailzier):
             return customerSerailzier.data
+
+
+class ExppenseTypesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ExpenseTypes
+        fields = '__all__'
+
+
+class ExpenseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Expense
+        fields = '__all__'
+
+
+class ReceivablesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Receivables
+        fields = '__all__'

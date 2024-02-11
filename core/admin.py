@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import TailorShop, CustomerInformation, MeasurementType, \
-    CustomerMeasurement, Order, OrderMeasurements
+    CustomerMeasurement, Order, OrderMeasurements, Expense, Receivables, \
+    ExpenseTypes
 
 
 @admin.register(TailorShop)
@@ -40,3 +41,23 @@ class OrderAdmin(admin.ModelAdmin):
                     'archieved', 'dokht_price', 'date_delivery', 'date_created']
     search_fields = ['customer__first_name',
                      'customer__last_name', 'measurement_type__name']
+
+
+@admin.register(Expense)
+class ExpenseAdmin(admin.ModelAdmin):
+    list_display = ('name', 'quantity', 'price', 'type',
+                    'paid', 'created', 'updated')
+    list_filter = ('type', 'paid', 'created', 'updated')
+    search_fields = ('name', 'type', 'created')
+    date_hierarchy = 'created'
+
+
+@admin.register(Receivables)
+class ReceivablesAdmin(admin.ModelAdmin):
+    list_display = ('customer', 'reason', 'price', 'paid')
+    search_fields = ('customer__name', 'reason', 'paid')
+
+
+@admin.register(ExpenseTypes)
+class ExpenseTypesAdmin(admin.ModelAdmin):
+    list_display = ('name',)

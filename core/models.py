@@ -8,7 +8,9 @@ class TailorShop(models.Model):
     description = models.TextField(null=True, blank=True)
     day_to_deliver = models.PositiveIntegerField(default=3)
     date_to_deliver = models.DateField(null=True, blank=True)
-    default_price = models.DecimalField(max_digits=10, decimal_places=1, default=350)
+    default_price = models.DecimalField(
+        max_digits=10, decimal_places=1, default=350)
+
     def __str__(self):
         return self.name
 
@@ -67,14 +69,18 @@ class Order(models.Model):
         OrderMeasurements, on_delete=models.CASCADE, null=True, blank=True)
     archieved = models.BooleanField(default=False)
     quantity = models.IntegerField(default=1)
-    parcha = models.CharField(max_length=60, null=True,blank=True)
-    meters = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    parcha = models.CharField(max_length=60, null=True, blank=True)
+    meters = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True)
 
     dokht_price = models.DecimalField(max_digits=10, decimal_places=2)
-    clothing_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    clothing_price = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0)
     rasid = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    al_baghi = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    al_baghi = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True)
+    grand_total = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True)
     date_delivery = models.DateField()
     date_created = models.DateField()
 
@@ -83,15 +89,41 @@ class Order(models.Model):
 
     def save(self, *args, **kwargs):
         fields_data = CustomerMeasurement.objects.filter(
-                measurement_type=self.measurement_type) \
-                    .filter(customer=self.customer).first()
+            measurement_type=self.measurement_type) \
+            .filter(customer=self.customer).first()
         new_measurement_instance = OrderMeasurements.objects.create(
-                customer=self.customer,
-                measurement_type=self.measurement_type,
-                data=fields_data.data
-            )
+            customer=self.customer,
+            measurement_type=self.measurement_type,
+            data=fields_data.data
+        )
         self.instance_measurement = new_measurement_instance
 
         self.grand_total = self.dokht_price + self.clothing_price
         self.al_baghi = self.grand_total - self.rasid
         super().save(*args, **kwargs)
+
+
+class ExpenseTypes (models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Expense (models.Model):
+    name = models.CharField(max_length=120)
+    quantity = models.CharField(max_length=60, null=True, blank=True)
+    price = models.FloatField()
+    type = models.ForeignKey(
+        ExpenseTypes, on_delete=models.CASCADE, null=True, blank=True)
+    paid = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+
+class Receivables (models.Model):
+    customer = models.OneToOneField(
+        CustomerInformation, on_delete=models.CASCADE)
+    reason = models.CharField(max_length=255)
+    price = models.FloatField()
+    paid = models.BooleanField(default=False)

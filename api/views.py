@@ -1,13 +1,17 @@
 from rest_framework import viewsets, filters
 from core.models import TailorShop, CustomerInformation, MeasurementType, \
-    CustomerMeasurement, Order, OrderMeasurements
+    CustomerMeasurement, Order, OrderMeasurements, Expense, Receivables, \
+    ExpenseTypes
 from .serializers import (
     TailorShopSerializer,
     CustomerInformationSerializer,
     MeasurementTypeSerializer,
     CustomerMeasurementSerializer,
     OrderSerializer,
-    OrderMesurementSerializer
+    OrderMesurementSerializer,
+    ExpenseSerializer,
+    ReceivablesSerializer,
+    ExppenseTypesSerializer
 )
 from django_filters import rest_framework as dfilters
 from django_filters.widgets import RangeWidget
@@ -42,12 +46,15 @@ class OrderMeasurementViewSet(viewsets.ModelViewSet):
     queryset = OrderMeasurements.objects.all()
     serializer_class = OrderMesurementSerializer
 
+
 class OrderFilter(dfilters.FilterSet):
-    date_delivery = dfilters.DateFromToRangeFilter(widget=RangeWidget(attrs={'type': 'date'}))
+    date_delivery = dfilters.DateFromToRangeFilter(
+        widget=RangeWidget(attrs={'type': 'date'}))
 
     class Meta:
         model = Order
-        fields = ['customer', 'date_delivery', 'measurement_type', 'archieved', 'date_created']
+        fields = ['customer', 'date_delivery',
+                  'measurement_type', 'archieved', 'date_created']
 
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -57,3 +64,18 @@ class OrderViewSet(viewsets.ModelViewSet):
     filterset_class = OrderFilter
     ordering_fields = ['id', 'date_delivery']
     ordering = ['id', 'date_delivery']
+
+
+class ExpenseViewSet(viewsets.ModelViewSet):
+    queryset = Expense.objects.all()
+    serializer_class = ExpenseSerializer
+
+
+class ReceivablesViewSet(viewsets.ModelViewSet):
+    queryset = Receivables.objects.all()
+    serializer_class = ReceivablesSerializer
+
+
+class ExpenseTypesViewSet(viewsets.ModelViewSet):
+    queryset = ExpenseTypes.objects.all()
+    serializer_class = ExppenseTypesSerializer
