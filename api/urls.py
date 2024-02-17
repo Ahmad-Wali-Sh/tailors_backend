@@ -9,7 +9,8 @@ from .views import (
     OrderMeasurementViewSet,
     ExpenseViewSet,
     ReceivablesViewSet,
-    ExpenseTypesViewSet
+    ExpenseTypesViewSet,
+    OrderReportViewSet
 )
 
 router = DefaultRouter()
@@ -22,6 +23,7 @@ router.register(r'orders', OrderViewSet)
 router.register(r'expense', ExpenseViewSet)
 router.register(r'recievebles', ReceivablesViewSet)
 router.register(r'expense-type', ExpenseTypesViewSet)
+router.register(r'orders-report', OrderReportViewSet)
 
 
 urlpatterns = [
