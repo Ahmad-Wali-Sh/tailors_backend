@@ -1,7 +1,7 @@
 from rest_framework import viewsets, filters
 from core.models import TailorShop, CustomerInformation, MeasurementType, \
     CustomerMeasurement, Order, OrderMeasurements, Expense, Receivables, \
-    ExpenseTypes
+    ExpenseTypes, PrintForm
 from .serializers import (
     TailorShopSerializer,
     CustomerInformationSerializer,
@@ -11,7 +11,8 @@ from .serializers import (
     OrderMesurementSerializer,
     ExpenseSerializer,
     ReceivablesSerializer,
-    ExppenseTypesSerializer
+    ExppenseTypesSerializer, 
+    PrintFormSerializer
 )
 from django_filters import rest_framework as dfilters
 from django_filters.widgets import RangeWidget
@@ -116,3 +117,7 @@ class ReceivablesViewSet(viewsets.ModelViewSet):
 class ExpenseTypesViewSet(viewsets.ModelViewSet):
     queryset = ExpenseTypes.objects.all()
     serializer_class = ExppenseTypesSerializer
+    
+class PrintFormViewSet(viewsets.ModelViewSet):
+    queryset = PrintForm.objects.all()
+    serializer_class = PrintFormSerializer

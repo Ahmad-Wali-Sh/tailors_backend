@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from core.models import TailorShop, CustomerInformation, MeasurementType, \
     CustomerMeasurement, Order, OrderMeasurements, Expense, Receivables, \
-    ExpenseTypes
+    ExpenseTypes, PrintForm
 
 
 class TailorShopSerializer(serializers.ModelSerializer):
@@ -82,4 +82,9 @@ class ExpenseSerializer(serializers.ModelSerializer):
 class ReceivablesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Receivables
+        fields = '__all__'
+
+class PrintFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PrintForm
         fields = '__all__'

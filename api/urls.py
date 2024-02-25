@@ -10,7 +10,8 @@ from .views import (
     ExpenseViewSet,
     ReceivablesViewSet,
     ExpenseTypesViewSet,
-    OrderReportViewSet
+    OrderReportViewSet,
+    PrintFormViewSet
 )
 
 router = DefaultRouter()
@@ -24,6 +25,7 @@ router.register(r'expense', ExpenseViewSet)
 router.register(r'recievebles', ReceivablesViewSet)
 router.register(r'expense-type', ExpenseTypesViewSet)
 router.register(r'orders-report', OrderReportViewSet)
+router.register(r'print-form', PrintFormViewSet)
 
 
 urlpatterns = [

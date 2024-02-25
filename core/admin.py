@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import TailorShop, CustomerInformation, MeasurementType, \
     CustomerMeasurement, Order, OrderMeasurements, Expense, Receivables, \
-    ExpenseTypes
+    ExpenseTypes, PrintForm
 
 
 @admin.register(TailorShop)
@@ -61,3 +61,7 @@ class ReceivablesAdmin(admin.ModelAdmin):
 @admin.register(ExpenseTypes)
 class ExpenseTypesAdmin(admin.ModelAdmin):
     list_display = ('name',)
+    
+@admin.register(PrintForm)
+class PrintFormAdmin(admin.ModelAdmin):
+    list_display = ['id', 'sar_created', 'sar_delivery', 'sar_quantity', 'sar_albaghi', 'sar_metraj', 'sar_price_parcha', 'sar_price_dokht', 'sar_price_grand', 'sar_price_rasid', 'sar_price_address', 'in_created', 'in_delivery', 'in_quantity', 'in_albaghi', 'in_metraj', 'in_price_parcha', 'in_price_dokht', 'in_price_grand', 'in_price_rasid', 'in_price_address']

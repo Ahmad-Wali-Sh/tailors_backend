@@ -127,3 +127,33 @@ class Receivables (models.Model):
     reason = models.CharField(max_length=255)
     price = models.FloatField()
     paid = models.BooleanField(default=False)
+    
+    
+class PrintForm (models.Model):
+    sar_created = models.BooleanField(default=True)
+    sar_delivery = models.BooleanField(default=True)
+    sar_quantity = models.BooleanField(default=True)
+    sar_albaghi = models.BooleanField(default=True)
+    sar_metraj = models.BooleanField(default=False)
+    sar_price_parcha = models.BooleanField(default=False)
+    sar_price_dokht = models.BooleanField(default=False)
+    sar_price_grand = models.BooleanField(default=False)
+    sar_price_rasid = models.BooleanField(default=False)
+    sar_price_address = models.BooleanField(default=True)
+    sar_parcha = models.BooleanField(default=True)
+    
+    in_created = models.BooleanField(default=True)
+    in_delivery = models.BooleanField(default=True)
+    in_quantity = models.BooleanField(default=True)
+    in_albaghi = models.BooleanField(default=True)
+    in_metraj = models.BooleanField(default=False)
+    in_price_parcha = models.BooleanField(default=False)
+    in_price_dokht = models.BooleanField(default=False)
+    in_price_grand = models.BooleanField(default=False)
+    in_price_rasid = models.BooleanField(default=False)
+    in_price_address = models.BooleanField(default=True)
+    in_parcha = models.BooleanField(default=True)
+    
+    paper_width = models.FloatField(default=300)
+    font_size = models.FloatField(default=16)
+    
